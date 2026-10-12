@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Count Your Khuchras</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font import for a cleaner look */
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap');
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-green-50 text-green-900 min-h-screen flex flex-col items-center justify-center p-4 selection:bg-green-200 selection:text-green-900">
+
+    <main class="w-full max-w-lg flex flex-col items-center text-center">
+        <div class="mb-8 flex flex-col items-center justify-center space-y-4">
+            <div class="w-16 h-16 text-green-800 animate-bounce flex items-center justify-center rounded-full border-4 border-current">
+                <span class="text-4xl font-bold mt-1">৳</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-green-900">
+                count your khuchras
+            </h1>
+            <p class="text-green-700 text-lg md:text-xl max-w-md mt-2">
+                Every little piece of change adds up to something big.
+            </p>
+        </div>
+
+        <div class="bg-green-100 border-2 border-green-800 rounded-3xl p-8 w-full shadow-[8px_8px_0px_0px_rgba(22,101,52,1)] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(22,101,52,1)] duration-200">
+            <div class="text-center mb-6">
+                <span class="block text-green-700 text-sm font-semibold uppercase tracking-wider mb-2">Total Khuchras</span>
+                <span id="counterDisplay" class="text-6xl font-bold text-green-900">৳0</span>
+            </div>
+            
+            <button id="addBtn" class="w-full bg-green-800 hover:bg-green-900 text-green-50 font-bold py-4 px-6 rounded-2xl transition-colors duration-200 focus:outline-none focus:ring-4 focus:ring-green-400 focus:ring-opacity-50 active:scale-95 flex items-center justify-center gap-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                Add One
+            </button>
+            
+            <div class="mt-4 flex justify-between items-center">
+                <button id="resetBtn" class="text-green-600 hover:text-green-800 text-sm font-semibold underline underline-offset-4 focus:outline-none">
+                    Reset Count
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // DOM Elements
+        const counterDisplay = document.getElementById('counterDisplay');
+        const addBtn = document.getElementById('addBtn');
+        const resetBtn = document.getElementById('resetBtn');
+
+        // State
+        let count = 0;
+
+        // Functions
+        function updateDisplay() {
+            counterDisplay.innerText = '৳' + count;
+            
+            // Add a small pop animation on change
+            counterDisplay.style.transform = 'scale(1.2)';
+            counterDisplay.style.transition = 'transform 0.1s ease-out';
+            
+            setTimeout(() => {
+                counterDisplay.style.transform = 'scale(1)';
+            }, 150);
+        }
+
+        // Event Listeners
+        addBtn.addEventListener('click', () => {
+            count++;
+            updateDisplay();
+        });
+
+        resetBtn.addEventListener('click', () => {
+            if(count > 0) {
+                count = 0;
+                updateDisplay();
+            }
+        });
+    </script>
+</body>
+</html>
